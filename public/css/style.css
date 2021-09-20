@@ -1,0 +1,9 @@
+.home_title {
+    color: black;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.btn_width_100 {
+    width: 100%;
+}

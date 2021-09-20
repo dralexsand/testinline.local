@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\v1\ApiController;
+use App\Http\Resources\Api\v1\AjaxController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/ajax/get_posts', [ApiController::class, 'getPosts']);
+Route::post('/ajax/get_comments', [ApiController::class, 'getComments']);
+Route::post('/ajax/clear_data_db', [ApiController::class, 'clearDataDb']);
+Route::post('/ajax/search_text', [ApiController::class, 'searchText']);
+
