@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('pages.home');
-});*/
+Route::get('/', [PostController::class, 'index'])->name('index');
+Route::post('/', [PostController::class, 'index'])->name('text_search');
 
-Route::get('/', [PostController::class, 'index']);

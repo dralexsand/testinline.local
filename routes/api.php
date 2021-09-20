@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/ajax/get_posts', [ApiController::class, 'getPosts']);
-Route::post('/ajax/get_comments', [ApiController::class, 'getComments']);
-Route::post('/ajax/clear_data_db', [ApiController::class, 'clearDataDb']);
-Route::post('/ajax/search_text', [ApiController::class, 'searchText']);
+Route::post('/get_posts', [ApiController::class, 'getPosts']);
+Route::post('/get_comments', [ApiController::class, 'getComments']);
+Route::post('/clear_data_db', [ApiController::class, 'clearDataDb']);
+//Route::post('/search_text', [ApiController::class, 'searchText']);
 

@@ -11,7 +11,14 @@
     <h1 class="home_title">Демо</h1>
     <hr>
 
-    <div id="flash_message"></div>
+    <div id="flash_message">
+        @if($message_info!=="")
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ $message_info }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
 
     <div class="row">
 
@@ -43,7 +50,7 @@
             </div>
         @endif
 
-        @if($isEmptyPosts || $isEmptyComments)
+        @if($isData)
             <div class="col-3">
                 @component('components.button',
                             [
@@ -51,23 +58,25 @@
                                 'id'=>'clear_data_db'
                             ])
                     @slot('title')
-                        Очистить данные в БД
+                        Очистить БД
                     @endslot
                 @endcomponent
             </div>
         @endif
 
-        @if(!$isEmptyPosts || !$isEmptyComments)
+        @if(!$isData)
             <div class="col-6">
                 @component('components.search', [
-                    'disabled' => 'disabled'
+                    'disabled' => 'disabled',
+                    'search_text' => ''
                 ])
                 @endcomponent
             </div>
         @else
             <div class="col-9">
                 @component('components.search', [
-                    'disabled' => ''
+                    'disabled' => '',
+                    'search_text' => $text
                 ])
                 @endcomponent
             </div>
@@ -77,18 +86,19 @@
 
     <hr>
 
-    <div class="container">
+    <div id="content_data" class="container">
 
         @if($isData)
 
             @foreach($comments as $comment)
                 @component('components.record',
                     [
-                      'post_title'=>'Post Title',
+                      'post_title'=>$comment->post->title,
                       'comment_name'=>$comment->name,
                       'comment_body'=>$comment->body,
                       'comment_email'=>$comment->email,
                       'comment_id'=>$comment->id,
+                      'post_id'=>$comment->post_id,
                     ])
                 @endcomponent
             @endforeach

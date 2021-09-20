@@ -7,3 +7,16 @@
 .btn_width_100 {
     width: 100%;
 }
+
+.selected_text {
+    color: blue;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration-style: dotted;
+    text-decoration: underline;
+}
+
+.card-header span {
+    color: green;
+    font-weight: bold;
+}
