@@ -40,13 +40,12 @@ class CommentService extends ServiceAbstract
 
     public function getRecord($post_title, $comment_name, $comment_body, $comment_email)
     {
-        return '<div class="card">
-    <h5 class="card-header">{{ $post_title }}</h5>
-    <div class="card-body">
-        <h5 class="card-title">{{ $comment_name }}</h5>
-        <p class="card-text">{{ $comment_body }}</p>
-        <footer><cite title="Source Title">{{ $comment_email }}</cite></footer>
-    </div>
-</div>';
+        return view("components.record", [
+            'post_title' => $post_title,
+            'comment_name' => $comment_name,
+            'comment_body' => $comment_body,
+            'comment_email' => $comment_email
+        ]);
     }
+
 }
