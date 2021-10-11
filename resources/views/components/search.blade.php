@@ -6,7 +6,7 @@
     @csrf
 
     <div class="input-group mb-3">
-        <input
+        <label for="text_search"></label><input
             type="text"
             id="text_search"
             name="text_search"

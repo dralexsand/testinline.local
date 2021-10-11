@@ -7,18 +7,18 @@ namespace App\Services;
 
 use Illuminate\Database\Eloquent\Collection;
 
-abstract class ServiceAbstract
+class ServiceAbstract
 {
     protected $model;
 
-    public function store(array $data)
+    public function store(array $data): void
     {
-        foreach ($data as $data_set) {
-            $this->getModel()::create($data_set);
+        foreach ($data as $dataSet) {
+            $this->getModel()::create($dataSet);
         }
     }
 
-    public function setModel($model)
+    public function setModel($model): void
     {
         $this->model = $model;
     }
@@ -40,24 +40,24 @@ abstract class ServiceAbstract
 
     public static function changeArrayKeys(array $array, array $keys): array
     {
-        $new_array = [];
+        $newArray = [];
 
         foreach ($array as $item) {
-            $new_item = [];
+            $newItem = [];
 
             foreach ($item as $keyItem => $valueItem) {
                 if (array_key_exists($keyItem, $keys)) {
                     $newKey = $keys[$keyItem];
-                    $new_item[$newKey] = $valueItem;
+                    $newItem[$newKey] = $valueItem;
                 } else {
-                    $new_item[$keyItem] = $valueItem;
+                    $newItem[$keyItem] = $valueItem;
                 }
             }
 
-            $new_array[] = $new_item;
+            $newArray[] = $newItem;
         }
 
-        return $new_array;
+        return $newArray;
     }
 
 }

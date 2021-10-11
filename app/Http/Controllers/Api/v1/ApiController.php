@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Http;
 
 class ApiController extends Controller
 {
-    protected $postService;
-    protected $commentService;
+    protected PostService $postService;
+    protected CommentService $commentService;
 
     public function __construct()
     {
@@ -20,8 +20,16 @@ class ApiController extends Controller
         $this->commentService = new CommentService();
     }
 
-    public function getPosts(Request $request)
+    public function getPosts(Request $request): array
     {
+        if (!($request->input('url'))) {
+            return [
+                'success' => false,
+                'data' => [],
+                'count' => 0,
+            ];
+        }
+
         $url = $request->input('url');
         $response = Http::get($url);
         $data = json_decode($response, true);
@@ -36,12 +44,20 @@ class ApiController extends Controller
         return [
             'success' => true,
             'data' => $response,
-            'count' => sizeof($data),
+            'count' => count($data),
         ];
     }
 
-    public function getComments(Request $request)
+    public function getComments(Request $request): array
     {
+        if (!($request->input('url'))) {
+            return [
+                'success' => false,
+                'data' => [],
+                'count' => 0,
+            ];
+        }
+
         $url = $request->input('url');
         $response = Http::get($url);
         $data = json_decode($response, true);
@@ -56,11 +72,11 @@ class ApiController extends Controller
         return [
             'success' => true,
             'data' => $response,
-            'count' => sizeof($data),
+            'count' => count($data),
         ];
     }
 
-    public function clearDataDb()
+    public function clearDataDb(): array
     {
         DB::table('posts')->truncate();
         DB::table('comments')->truncate();

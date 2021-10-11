@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\v1\ApiController;
-use App\Http\Resources\Api\v1\AjaxController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

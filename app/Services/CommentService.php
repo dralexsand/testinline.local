@@ -23,28 +23,28 @@ class CommentService extends ServiceAbstract
             ->get();
     }
 
-    public function selectedSearchText(Collection $records, string $search_text): array
+    public function selectedSearchText(Collection $records, string $searchText): array
     {
-        $selected_records = [];
-        $replaced_text = "<strong class='selected_text'>$search_text</strong>";
+        $selectedRecords = [];
+        $replacedText = "<strong class='selected_text'>$searchText</strong>";
 
         foreach ($records as $key => $record) {
-            $new_body = str_replace($search_text, $replaced_text, $record->body);
-            $new_record = $record;
-            $new_record->setBody($new_body);
-            $selected_records[$key] = $new_record;
+            $newBody = str_replace($searchText, $replacedText, $record->body);
+            $newRecord = $record;
+            $newRecord->setBody($newBody);
+            $selectedRecords[$key] = $newRecord;
         }
 
-        return $selected_records;
+        return $selectedRecords;
     }
 
-    public function getRecord($post_title, $comment_name, $comment_body, $comment_email)
+    public function getRecord($postTitle, $commentName, $commentBody, $commentEmail)
     {
         return view("components.record", [
-            'post_title' => $post_title,
-            'comment_name' => $comment_name,
-            'comment_body' => $comment_body,
-            'comment_email' => $comment_email
+            'post_title' => $postTitle,
+            'comment_name' => $commentName,
+            'comment_body' => $commentBody,
+            'comment_email' => $commentEmail
         ]);
     }
 

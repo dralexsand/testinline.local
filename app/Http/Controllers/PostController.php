@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    protected $postService;
-    protected $commentService;
+    protected PostService $postService;
+    protected CommentService $commentService;
 
     public function __construct()
     {
@@ -24,14 +24,14 @@ class PostController extends Controller
 
         $posts = [];
         $comments = [];
-        $message_info = "";
+        $messageInfo = "";
         $text = "";
 
         if ($isEmptyPosts && $isEmptyComments) {
             $posts = $this->postService->getAll();
 
             if (isset($request->text_search)
-                && trim($request->text_search) != ''
+                && trim($request->text_search) !== ''
                 && strlen(trim($request->text_search)) >= 3
             ) {
                 $text = $request->input('text_search');
@@ -41,8 +41,8 @@ class PostController extends Controller
                 $comments = $this->commentService->getAll();
             }
 
-            $comments_count = sizeof($comments);
-            $message_info = "Найдено $comments_count комментариев";
+            $commentsCount = count($comments);
+            $messageInfo = "Найдено $commentsCount комментариев";
         }
 
         $isData = $isEmptyPosts && $isEmptyComments;
@@ -52,7 +52,7 @@ class PostController extends Controller
             'isEmptyComments' => $isEmptyComments,
             'posts' => $posts,
             'comments' => $comments,
-            'message_info' => $message_info,
+            'message_info' => $messageInfo,
             'isData' => $isData,
             'text' => $text,
         ]);
